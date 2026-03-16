@@ -1,11 +1,10 @@
 # Data (too large for GitHub)
-data/raw/
-data/processed/
-*.csv
+
 
 # Keep the sample folder (small, committed)
-!data/sample/
-!data/sample/*.csv
+!data/sample
+!data/sample
+*.csv
 
 # Models (large binary files)
 models/
