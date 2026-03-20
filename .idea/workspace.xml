@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a28c6c97-bcfd-40a8-a7e5-9b4e756ad3fc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/AI_Citizen_Grievance_System.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/grievance-ai-team/data/raw/no_pii_grievance.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/grievance-ai-team/notebooks/week2_depasrtment_classification.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grievance-ai-team/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/grievance-ai-team/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grievance-ai-team/data/processed/addedprocessed.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/grievance-ai-team/data/processed/processed.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/grievance-ai-team/notebooks/week1_eda_preprocessing.ipynb" afterDir="false" />
