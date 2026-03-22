@@ -1,4 +1,5 @@
 # Data (too large for GitHub)
+*.json
 
 
 # Keep the sample folder (small, committed)
