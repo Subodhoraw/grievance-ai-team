@@ -28,3 +28,7 @@ Thumbs.db
 
 # .ven
 .venv
+model/
+data/raw/
+data/processed/
+outputs/*.jpg

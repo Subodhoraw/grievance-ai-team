@@ -1,16 +1,64 @@
-git # This is a sample Python script.
+from fastapi import FastAPI
+from pydantic import BaseModel
+import joblib
+from transformers import pipeline
+import re
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Load trained models
+tfidf = joblib.load('model/tfidf_vectorizer.pkl')
+dept_model = joblib.load('model/department_model.pkl')
 
+# Load BERT sentiment model
+sentiment_pipeline = pipeline(
+    "sentiment-analysis",
+    model="distilbert-base-uncased-finetuned-sst-2-english"
+)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Initialize FastAPI
+app = FastAPI(title="AI Grievance System API")
 
+# Request schema
+class ComplaintRequest(BaseModel):
+    text: str
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Text cleaning function
+def clean_text(text):
+    text = str(text).lower()
+    text = re.sub(r'[^a-zA-Z\s]', '', text)
+    return text
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Prediction pipeline
+def predict_pipeline(text):
+    cleaned = clean_text(text)
+
+    # Department prediction
+    vec = tfidf.transform([cleaned])
+    dept = dept_model.predict(vec)[0]
+
+    # Sentiment prediction
+    sentiment_raw = sentiment_pipeline(text[:512])[0]['label']
+    sentiment = "Positive" if sentiment_raw == "POSITIVE" else "Negative"
+
+    # Priority logic
+    priority = 3 if sentiment == "Negative" else 1
+
+    # Confidence score
+    confidence = dept_model.predict_proba(vec).max()
+
+    return {
+        "complaint": text,
+        "department": dept,
+        "sentiment": sentiment,
+        "priority": priority,
+        "confidence": round(float(confidence), 2)
+    }
+
+# Root endpoint
+@app.get("/")
+def home():
+    return {"message": "AI Grievance System Running 🚀"}
+
+# Prediction endpoint
+@app.post("/predict")
+def predict(request: ComplaintRequest):
+    return predict_pipeline(request.text)
