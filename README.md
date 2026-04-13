@@ -10,9 +10,9 @@ then assigns a **priority score** using NLP + BERT.
 | Name | Role |
 |------|------|
 | Subodh | Team Lead / NLP |
-| KIRAN | ML Engineer |
-| Janu | Data Engineer |
-| Kunal | API / DevOps |
+| Janu | Data Engineer / API |
+| Kunal | ML Engineer |
+| KIRAN | 
 
 ## 🚀 Quick Setup
 
@@ -40,16 +40,10 @@ grievance-ai-team/
 
 ## 📊 Results
 
-*(To be updated after Week 3)*
-
 | Model | Accuracy | Macro F1 |
 |-------|----------|----------|
-| Dept Classifier (SVM) | — | — |
-| Sentiment (BERT) | — | — |
-
-## 🔌 API Usage
-
-*(To be updated after Week 4)*
+| Dept Classifier (SVM) | 64% | Logistic Regression |
+| Sentiment (BERT) | High | Pretrained model |
 
 ## 📝 License
 
@@ -70,172 +64,123 @@ The system is designed to:
 This solution aims to improve response time, transparency, and efficiency in public service systems.
 
 ---
+📅* Week 1: Data Cleaning & EDA
+🔧* Work Done
 
-# 📅 Week 1: Data Collection, Cleaning & EDA
+Loaded raw JSON dataset
+Selected relevant columns:
+subject_content_text → complaint
+org_code → department
 
-## 🎯 Objective
+* Cleaned text:
+- Lowercasing
+- Removing special characters
+- Removing missing values
 
-The primary goal of Week 1 was to transform raw grievance data into a structured and clean format suitable for machine learning.
+📊* EDA
+- WordCloud visualization
+- N-gram analysis
+- Complaint distribution across departments
 
----
-
-## 📂 Dataset Description
-
-The dataset contains citizen complaints submitted to various departments, along with metadata.
-
-### Key Features Used:
-
-* **Complaint Text** (`subject_content_text`) → Input feature
-* **Department Code** (`org_code`) → Target variable
-
----
-
-## 🧹 Data Preprocessing
-
-The raw dataset required extensive cleaning:
-
-* Extracted only relevant columns
-* Renamed columns for clarity:
-
-  * `subject_content_text` → `complaint`
-  * `org_code` → `department`
-* Removed missing and invalid entries
-* Standardized text by:
-
-  * Converting to lowercase
-  * Removing special characters
-  * Cleaning unnecessary formatting
-
----
-
-## 📊 Exploratory Data Analysis (EDA)
-
-To understand the data better:
-
-* Generated **WordCloud** to visualize frequently used words
-* Performed **N-gram analysis** to identify common phrase patterns
-* Analyzed distribution of complaints across departments
-
----
-
-## 💾 Data Storage
-
-The cleaned dataset was saved in:
-
-```
+📁* Output
 data/processed/cleaned_data.csv
-```
+📅* Week 2: Department Classification
+🔧 Feature Engineering
+-TF-IDF Vectorization
 
-This ensures reproducibility and separation of raw vs processed data.
+🤖* Model
+Logistic Regression
+class_weight='balanced'
 
----
+⚖️ * Handling Class Imbalance
+Removed departments with very low samples
 
-## ✅ Week 1 Outcome
+📊 * Evaluation
+- Accuracy: ~64%
+* Metrics:
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
+  
+📅 * Week 3: Sentiment Analysis & Priority
 
-* Converted raw JSON data into structured format
-* Cleaned and prepared dataset for modeling
-* Identified key patterns using EDA
+🤖* Model Used
+Pretrained BERT (DistilBERT)
 
----
+🔍* Process
+Classified sentiment:
+POSITIVE
+NEGATIVE
 
-# 📅 Week 2: Department Classification Model
+⚡* Priority Logic
+Sentiment	Priority
+Negative	High (3)
+Neutral	Medium (2)
+Positive	Low (1)
 
-## 🎯 Objective
+✅* Outcome
 
-The goal of Week 2 was to build a machine learning model to automatically classify complaints into appropriate government departments.
+* Each complaint now includes:
+- Department
+- Sentiment
+- Priority Score
+  
+📅* Week 4: API & Deployment 🚀
+🌐* FastAPI Backend
+▶️ Run API
+python -m uvicorn main:app --reload
 
----
+📍 * Endpoint
+POST /predict
 
-## 🔢 Feature Engineering
+📥*  Input
+{
+  "text": "Water supply is not coming for 3 days"
+}
+📤 Output
+{
+  "department": "Water",
+  "sentiment": "NEGATIVE",
+  "priority": 3
+}
 
-Text data was transformed into numerical format using:
+🎨* Streamlit Frontend
 
-* **TF-IDF (Term Frequency-Inverse Document Frequency)**
+▶️* Run App
+streamlit run streamlit_app.py
 
-This helps capture the importance of words in each complaint.
+💡* Features
+- Simple and clean UI
+- Real-time prediction
+- Displays:
+- Department
+- Sentiment
+- Priority
+  
+  🧠* Key Learnings
+- Importance of text preprocessing
+- TF-IDF for baseline NLP models
+- Power of pretrained transformers (BERT)
+- Real-world deployment challenges
+- 
+⚠️ * Challenges Faced
+- Noisy real-world data
+- Class imbalance
+- Dependency & environment issues
+- API integration
+  
+🚀* Future Improvements
+- Multi-language support
+- Advanced transformer models (RoBERTa)
+- Database integration
+- Analytics dashboard for policymakers
+  
+* This project demonstrates how AI can:
 
----
-
-## ✂️ Data Splitting
-
-The dataset was divided into:
-
-* Training set (80%)
-* Testing set (20%)
-
-This allows evaluation on unseen data.
-
----
-
-## 🤖 Model Development
-
-A **Logistic Regression** model was implemented as the baseline classifier.
-
-Enhancements applied:
-
-* Increased iterations (`max_iter=300`)
-* Used `class_weight='balanced'` to address imbalance
-
----
-
-## ⚖️ Handling Class Imbalance
-
-The dataset had many departments with very few samples.
-
-To improve performance:
-
-* Rare classes were removed
-* Balanced class weights were applied
-
----
-
-## 📊 Model Evaluation
-
-The model was evaluated using:
-
-* Accuracy Score
-* Precision, Recall, F1-score
-* Confusion Matrix
-
----
-
-## 📈 Results
-
-* Achieved ~64% baseline accuracy
-* Improved classification performance after handling imbalance
-* Better predictions for frequently occurring departments
-
----
-
-## ✅ Week 2 Outcome
-
-* Successfully built and trained classification model
-* Improved model performance using practical techniques
-* Automated routing of complaints to departments
-
----
-
-# 🧠 Key Learnings
-
-* Real-world data requires extensive preprocessing
-* Text must be converted into numerical form for ML models
-* Class imbalance significantly impacts model performance
-* Evaluation metrics beyond accuracy are critical
-
----
-
-# 🚀 Next Steps (Week 3)
-
-* Perform Sentiment Analysis on complaints
-* Assign priority scores based on urgency
-* Build a dual-output system (Department + Sentiment)
-
----
-
-# 🏁 Conclusion
-
-By the end of Week 2, a functional AI system has been developed that can automatically classify citizen complaints into appropriate departments.
-
-This forms the foundation for building a complete intelligent grievance management system.
+✔ Automate grievance handling
+✔ Identify urgent issues quickly
+✔ Reduce manual workload
+✔ Improve public service efficiency
 
 ---
