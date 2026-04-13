@@ -1,27 +1,27 @@
 # Core
-pandas==2.2.2
-numpy==1.26.4
-scikit-learn==1.5.0
+pandas
+numpy
+scikit-learn
 
 # NLP
-nltk==3.8.1
-transformers==4.41.2
-torch==2.4.1
+nltk
+transformers
+torch
 
 # API
-fastapi==0.111.0
-uvicorn==0.30.1
-python-dotenv==1.0.1
-pydantic==2.7.1
+fastapi
+uvicorn
+python-dotenv
+pydantic
 
 # Visualization
-matplotlib==3.9.0
-seaborn==0.13.2
-wordcloud==1.9.3
+matplotlib
+seaborn
+wordcloud
 
 # Utilities
-joblib==1.4.2
-httpx==0.27.0
+joblib
+httpx
 
 # Deploy
 streamlit==1.42.2
