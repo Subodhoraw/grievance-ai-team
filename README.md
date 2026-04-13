@@ -14,6 +14,17 @@ then assigns a **priority score** using NLP + BERT.
 | Kunal | ML Engineer |
 | KIRAN | 
 
+# 🌐 Live Demo
+
+🚀 Try the application here:  
+👉 (https://grievance-ai-team-d5qyghjzcgzrfrxkvaona6.streamlit.app/)
+
+# 📸 Application Demo
+
+Here is a preview of the system:
+![Streamlit (1)](https://github.com/user-attachments/assets/7c0f2b97-57a8-469c-8ca6-e8ef663e2c19)
+![Streamlit (2)](https://github.com/user-attachments/assets/0334b9c6-fff3-455d-8fdf-12b0bd71076d)
+
 ## 🚀 Quick Setup
 
 ```bash
@@ -64,77 +75,85 @@ The system is designed to:
 This solution aims to improve response time, transparency, and efficiency in public service systems.
 
 ---
-📅* Week 1: Data Cleaning & EDA
-🔧* Work Done
 
-Loaded raw JSON dataset
-Selected relevant columns:
-subject_content_text → complaint
-org_code → department
+## 📅 Week 1: Data Cleaning & EDA
+🔧 Work Done
+- Loaded raw JSON dataset
+- Selected relevant columns:
+- subject_content_text → complaint
+- org_code → department
 
-* Cleaned text:
+ Cleaned text:
 - Lowercasing
 - Removing special characters
 - Removing missing values
 
-📊* EDA
+📊 EDA
 - WordCloud visualization
 - N-gram analysis
 - Complaint distribution across departments
 
-📁* Output
+📁 Output
 data/processed/cleaned_data.csv
-📅* Week 2: Department Classification
+
+----
+
+## 📅 Week 2: Department Classification
 🔧 Feature Engineering
 -TF-IDF Vectorization
 
-🤖* Model
+🤖 Model
 Logistic Regression
 class_weight='balanced'
 
-⚖️ * Handling Class Imbalance
+⚖️ Handling Class Imbalance
 Removed departments with very low samples
 
-📊 * Evaluation
+📊  Evaluation
 - Accuracy: ~64%
 * Metrics:
 - Precision
 - Recall
 - F1-score
 - Confusion Matrix
-  
-📅 * Week 3: Sentiment Analysis & Priority
 
-🤖* Model Used
+----
+  
+## 📅  Week 3: Sentiment Analysis & Priority
+
+🤖 Model Used
 Pretrained BERT (DistilBERT)
 
-🔍* Process
+🔍 Process
 Classified sentiment:
 POSITIVE
 NEGATIVE
 
-⚡* Priority Logic
+⚡ Priority Logic
 Sentiment	Priority
 Negative	High (3)
 Neutral	Medium (2)
 Positive	Low (1)
 
-✅* Outcome
+✅ Outcome
 
-* Each complaint now includes:
+ Each complaint now includes:
 - Department
 - Sentiment
 - Priority Score
+
+---
   
-📅* Week 4: API & Deployment 🚀
-🌐* FastAPI Backend
+## 📅 Week 4: API & Deployment 🚀
+🌐 FastAPI Backend
 ▶️ Run API
 python -m uvicorn main:app --reload
 
-📍 * Endpoint
+📍  Endpoint 
+
 POST /predict
 
-📥*  Input
+📥  Input
 {
   "text": "Water supply is not coming for 3 days"
 }
@@ -145,12 +164,7 @@ POST /predict
   "priority": 3
 }
 
-🎨* Streamlit Frontend
-
-▶️* Run App
-streamlit run streamlit_app.py
-
-💡* Features
+## 💡 Features
 - Simple and clean UI
 - Real-time prediction
 - Displays:
@@ -158,25 +172,25 @@ streamlit run streamlit_app.py
 - Sentiment
 - Priority
   
-  🧠* Key Learnings
+## 🧠 Key Learnings
 - Importance of text preprocessing
 - TF-IDF for baseline NLP models
 - Power of pretrained transformers (BERT)
 - Real-world deployment challenges
-- 
-⚠️ * Challenges Faced
+
+## ⚠️  Challenges Faced
 - Noisy real-world data
 - Class imbalance
 - Dependency & environment issues
 - API integration
   
-🚀* Future Improvements
+## 🚀 Future Improvements
 - Multi-language support
 - Advanced transformer models (RoBERTa)
 - Database integration
 - Analytics dashboard for policymakers
-  
-* This project demonstrates how AI can:
+
+## This project demonstrates how AI can:
 
 ✔ Automate grievance handling
 ✔ Identify urgent issues quickly
