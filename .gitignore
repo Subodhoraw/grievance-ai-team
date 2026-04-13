@@ -8,8 +8,6 @@
 *.csv
 
 # Models (large binary files)
-models/
-!models/.gitkeep
 
 # Python
 __pycache__/
